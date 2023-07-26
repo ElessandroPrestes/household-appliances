@@ -72,9 +72,12 @@ class BrandController extends Controller
 
     /**
      * Remove the specified resource from storage.
+     * @param int $id
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $this->brandService->destroyBrand($id);
+
+        return response([], 204);
     }
 }

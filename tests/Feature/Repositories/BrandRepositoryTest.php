@@ -9,6 +9,7 @@ use App\Repositories\Contracts\BrandRepositoryInterface;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tests\TestCase;
 
 class BrandRepositoryTest extends TestCase
@@ -120,5 +121,32 @@ class BrandRepositoryTest extends TestCase
         $this->assertDatabaseHas('brands', [
             'id' => $brand->id,
         ]);
+    }
+
+    /**
+     * @test
+     */
+    public function destroy_brand()
+    {
+        $brand = Brand::factory()->create();
+
+        $destroyed = $this->brandRepository->destroyBrand($brand->id);
+
+        $this->assertTrue($destroyed);
+
+        $this->assertDatabaseMissing('brands', [
+            $destroyed == $brand->id 
+        ]);
+    }
+
+     /**
+     * @test
+     */
+    public function destroy_brand_not_found()
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        $this->brandRepository->findBrandById('fake_id');
+
     }
 }

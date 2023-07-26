@@ -13,4 +13,6 @@ interface BrandRepositoryInterface
 
     public function updateBrand($id, array $brand);
 
+    public function destroyBrand($id);
+
 }
