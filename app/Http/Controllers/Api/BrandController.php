@@ -44,10 +44,16 @@ class BrandController extends Controller
 
     /**
      * Display the specified resource.
+     * @param int $id
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $brand = $this->brandService->findBrandById($id);
+
+        return response([
+            'data'     =>  new BrandResource($brand),
+            'message'  =>  'Brand Successfully listed'
+       ], 200);
     }
 
     /**

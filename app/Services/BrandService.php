@@ -23,4 +23,9 @@ class BrandService
         return $this->brandRepository->createBrand($brand);
     }
 
+    public function findBrandById(int $id)
+    {
+        return $this->brandRepository->findBrandById($id);
+    }
+
 }

@@ -9,4 +9,6 @@ interface BrandRepositoryInterface
     
     public function createBrand(array $product);
 
+    public function findBrandById($id);
+
 }

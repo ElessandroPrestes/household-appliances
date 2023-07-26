@@ -5,6 +5,7 @@ namespace App\Repositories;
 use App\Models\Brand;
 use App\Repositories\Contracts\BrandRepositoryInterface;
 use Illuminate\Support\Facades\Cache;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class BrandRepository implements BrandRepositoryInterface
 {
@@ -25,5 +26,21 @@ class BrandRepository implements BrandRepositoryInterface
     public function createBrand(array $brand)
     {
         return $this->modelBrand->create($brand);
+    }
+
+    public function findBrandById($id)
+    {
+        try {
+            
+            $brand = $this->modelBrand->where('id',$id)->firstOrFail();
+
+            return $brand;
+
+        } catch (\Throwable $th ) {
+
+            throw new NotFoundHttpException();
+
+        }
+      
     }
 }

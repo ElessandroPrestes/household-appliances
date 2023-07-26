@@ -14,12 +14,4 @@ class Brand extends Model
         'name'
     ];
 
-    protected $casts = [
-        'brand' => BrandNameEnum::class,
-    ];
-
-    public function products()
-    {
-        return $this->hasMany(Product::class);
-    }
 }

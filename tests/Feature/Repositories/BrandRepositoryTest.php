@@ -91,4 +91,16 @@ class BrandRepositoryTest extends TestCase
  
          $this->assertCount(10, $response);
      }
+
+     /**
+      * @test
+      */
+      public function find_brand_by_id()
+      {
+          $brand = Brand::factory()->create();
+  
+          $response = $this->brandRepository->findBrandById($brand->id);
+  
+          $this->assertIsObject($response);
+      }
 }
