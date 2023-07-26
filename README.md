@@ -52,6 +52,9 @@ Aguarde a finalização.
 9. Execute as migrations :
     php artisan migrate
 
+10. Execute os Seeds
+    php artisan db:seed
+
 ```
 
 <br>
@@ -75,6 +78,11 @@ OBS : Caso tenha saido do container, repita o passo 6 da instalação.
 ### Acesse no seu browser:
 
 ```
+Documentação da API
+
+L5-Swagger - Packpage
+http://localhost:8000/api/documentation
+
 Adminer - Ferramenta de gerenciamento de banco de dados
 
     http://localhost:8080
