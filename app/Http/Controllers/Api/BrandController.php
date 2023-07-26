@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreBrandRequest;
+use App\Http\Requests\UpdateBrandRequest;
 use App\Http\Resources\BrandResource;
 use App\Services\BrandService;
 use Illuminate\Http\Request;
@@ -58,10 +59,15 @@ class BrandController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param int $id
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateBrandRequest $request,$id)
     {
-        //
+        $this->brandService->updateBrand($id, $request->validated());
+
+        return response([
+            'message' =>    'Brand Updated successfully'
+        ], 200);
     }
 
     /**

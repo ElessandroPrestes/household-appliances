@@ -28,4 +28,9 @@ class BrandService
         return $this->brandRepository->findBrandById($id);
     }
 
+    public function updateBrand(int $id, array $brand)
+    {
+        return $this->brandRepository->updateBrand($id, $brand);
+    }
+
 }

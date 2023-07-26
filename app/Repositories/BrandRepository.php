@@ -43,4 +43,17 @@ class BrandRepository implements BrandRepositoryInterface
         }
       
     }
+
+    public function updateBrand($id, array $brand)
+    {
+        $edit = $this->findBrandById($id);
+
+        Cache::forget('brands');
+
+        return $edit->update($brand);
+
+        
+    }
+
+
 }
