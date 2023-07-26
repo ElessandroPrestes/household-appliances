@@ -33,4 +33,9 @@ class BrandService
         return $this->brandRepository->updateBrand($id, $brand);
     }
 
+    public function destroyBrand(int $id)
+    {
+        return $this->brandRepository->destroyBrand($id);
+    }
+
 }

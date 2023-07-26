@@ -38,7 +38,7 @@ class BrandRepository implements BrandRepositoryInterface
 
         } catch (\Throwable $th ) {
 
-            throw new NotFoundHttpException();
+            throw new NotFoundHttpException('Brand Not Found');
 
         }
       
@@ -52,8 +52,15 @@ class BrandRepository implements BrandRepositoryInterface
 
         return $edit->update($brand);
 
-        
     }
 
+    public function destroyBrand($id)
+    {
+        $delete = $this->findBrandById($id);
+
+        Cache::forget('brands');
+
+        return $delete->delete();
+    }
 
 }
