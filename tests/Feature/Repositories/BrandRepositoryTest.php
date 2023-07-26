@@ -68,4 +68,27 @@ class BrandRepositoryTest extends TestCase
             'name' => 'LG'
         ]);
     }
+
+     /**
+     * @test
+     */
+    public function find_all_brands_empty()
+    {
+        $response = $this->brandRepository->findAllBrands();
+
+        $this->assertCount(0, $response);
+    }
+
+    /**
+     * @test
+     */
+
+     public function find_all_brands()
+     {
+         Brand::factory()->count(10)->create();
+ 
+         $response = $this->brandRepository->findAllBrands();
+ 
+         $this->assertCount(10, $response);
+     }
 }

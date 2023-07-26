@@ -21,7 +21,12 @@ class BrandController extends Controller
      */
     public function index()
     {
-        //
+        $brands = $this->brandService->findAllBrands();
+
+        return response([
+            'data' => BrandResource::collection($brands),
+            'message' => 'Brands Successfully listed'
+        ], 200);
     }
 
     /**
