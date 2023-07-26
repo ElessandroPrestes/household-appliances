@@ -103,4 +103,22 @@ class BrandRepositoryTest extends TestCase
   
           $this->assertIsObject($response);
       }
+
+      /**
+      * @test
+      */
+      public function update_brand()
+    {
+        $brand = Brand::factory()->create();
+
+        $response = $this->brandRepository->findBrandById($brand->id);
+
+        $this->assertNotNull($response);
+
+        $this->assertIsObject($response);
+
+        $this->assertDatabaseHas('brands', [
+            'id' => $brand->id,
+        ]);
+    }
 }
