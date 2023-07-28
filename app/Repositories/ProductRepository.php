@@ -3,10 +3,6 @@
 namespace App\Repositories;
 
 use App\Models\Product;
-<<<<<<< HEAD
-=======
-use App\Repositories\Contracts\brandId;
->>>>>>> dev
 use App\Repositories\Contracts\ProductRepositoryInterface;
 
 class ProductRepository implements ProductRepositoryInterface
