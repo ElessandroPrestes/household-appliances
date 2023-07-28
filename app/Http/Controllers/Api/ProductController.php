@@ -19,20 +19,14 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
-<<<<<<< HEAD
-    public function index()
-    {
-        //
-=======
     public function index($brand)
     {
-        $products = $this->productService->findProductByBrand($brand);
+        $products = $this->productService->findAllProductByBrand($brand);
 
         return response([
             'data' => ProductResource::collection($products),
             'message' => 'Products Successfully listed'
         ], 200);
->>>>>>> dev
     }
 
     /**
@@ -52,10 +46,16 @@ class ProductController extends Controller
 
     /**
      * Display the specified resource.
+     * @param string $uuid
      */
-    public function show(string $id)
+    public function show($brand, $uuid)
     {
-        //
+        $brand = $this->productService->findProductByBrand($brand, $uuid);
+
+        return response([
+            'data'=>new ProductResource($brand),
+            'message' => 'Product By Brand successfully listed'
+       ], 200);
     }
 
     /**

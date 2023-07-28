@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductRepository implements ProductRepositoryInterface
 {
@@ -14,7 +15,7 @@ class ProductRepository implements ProductRepositoryInterface
         $this->modelProduct = $product;
     }
 
-    public function findProductByBrand(int $brandId)
+    public function findAllProductByBrand(int $brandId)
     {
         return $this->modelProduct
                                 ->where('brand_id', $brandId)
@@ -27,6 +28,29 @@ class ProductRepository implements ProductRepositoryInterface
         
         return $this->modelProduct->create($data);
         
+    }
 
+    public function findProductByUuid(string $uuid)
+    {
+        return $this->modelProduct
+                    ->where('uuid', $uuid)
+                    ->firstOrfail();
+    }
+
+    public function findProductByBrand(int $brandId, string $uuid)
+    {
+        try {
+            $productBrand  = $this->modelProduct
+                                ->where('brand_id', $brandId)
+                                ->where('uuid', $uuid)
+                                ->firstOrfail();
+                                
+            return $productBrand;
+
+        } catch (\Throwable $th) { 
+
+            throw new NotFoundHttpException('Brand By Product Not Found');
+        }
+        
     }
 }

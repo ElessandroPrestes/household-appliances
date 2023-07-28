@@ -16,11 +16,11 @@ class ProductService
         $this->brandRepository = $brandRepository;
     }
 
-    public function findProductByBrand(string $brand)
+    public function findAllProductByBrand(string $brand)
     {
         $brand = $this->brandRepository->findBrandByUuid($brand);
 
-        return $this->productRepository->findProductByBrand($brand->id);
+        return $this->productRepository->findAllProductByBrand($brand->id);
     }
 
     public function createProduct(array $data)
@@ -28,6 +28,13 @@ class ProductService
         $brand = $this->brandRepository->findBrandByUuid($data['brand']);
        
         return $this->productRepository->createProduct($brand->id, $data);
+    }
+
+    public function findProductByBrand(string $brand, string $uuid)
+    {
+        $brand = $this->brandRepository->findBrandByUuid($brand);
+
+        return $this->productRepository->findProductByBrand($brand->id, $uuid);
     }
 
 }
