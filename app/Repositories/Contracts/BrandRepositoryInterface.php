@@ -9,10 +9,10 @@ interface BrandRepositoryInterface
     
     public function createBrand(array $brand);
 
-    public function findBrandById($id);
+    public function findBrandByUuid(string $uuid);
 
     public function updateBrand($id, array $brand);
 
-    public function destroyBrand($id);
+    public function destroyBrand(string $uuid);
 
 }

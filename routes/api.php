@@ -21,4 +21,12 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 });
 
 
-Route::apiResource('v1/brands', BrandController::class);
+//Route::apiResource('v1/brands', BrandController::class);
+
+Route::put('v1/brands/{brand}', [BrandController::class, 'update']);
+Route::delete('v1/brands/{uuid}', [BrandController::class, 'destroy']);
+Route::get('v1/brands/{uuid}', [BrandController::class, 'show']);
+Route::post('v1/brands', [BrandController::class, 'store']);
+Route::get('v1/brands', [BrandController::class, 'index']);
+
+Route::apiResource('v1/brands/{brand}/products', ProductController::class);

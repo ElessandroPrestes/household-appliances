@@ -30,6 +30,7 @@ class EventServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Brand::observe(BrandObserver::class);
+        Product::observe(ProductObserver::class);
     }
 
     /**

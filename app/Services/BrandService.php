@@ -23,19 +23,19 @@ class BrandService
         return $this->brandRepository->createBrand($brand);
     }
 
-    public function findBrandById(int $id)
+    public function findBrandByUuid(string $uuid)
     {
-        return $this->brandRepository->findBrandById($id);
+        return $this->brandRepository->findBrandByUuid($uuid);
     }
 
-    public function updateBrand(int $id, array $brand)
+    public function updateBrand(string $uuid, array $brand)
     {
-        return $this->brandRepository->updateBrand($id, $brand);
+        return $this->brandRepository->updateBrand($uuid, $brand);
     }
 
-    public function destroyBrand(int $id)
+    public function destroyBrand(string $uuid)
     {
-        return $this->brandRepository->destroyBrand($id);
+        return $this->brandRepository->destroyBrand($uuid);
     }
 
 }
