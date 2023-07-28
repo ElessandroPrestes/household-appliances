@@ -18,9 +18,11 @@ class BrandRepository implements BrandRepositoryInterface
 
     public function findAllBrands()
     {
-        return Cache::rememberForever('brand', function(){
-            return $this->modelBrand->get();
-        });
+        Cache::forget('brand:all');
+        
+        return $this->modelBrand->get();
+        
+
     }
 
     public function createBrand(array $brand)
@@ -28,12 +30,12 @@ class BrandRepository implements BrandRepositoryInterface
         return $this->modelBrand->create($brand);
     }
 
-    public function findBrandById($id)
+    public function findBrandByUuid(string $uuid)
     {
         try {
             
-            $brand = $this->modelBrand->where('id',$id)->firstOrFail();
-
+            $brand = $this->modelBrand->where('uuid',$uuid)->firstOrFail();
+            
             return $brand;
 
         } catch (\Throwable $th ) {
@@ -44,21 +46,21 @@ class BrandRepository implements BrandRepositoryInterface
       
     }
 
-    public function updateBrand($id, array $brand)
+    public function updateBrand($uuid, array $brand)
     {
-        $edit = $this->findBrandById($id);
+        $edit = $this->findBrandByUuid($uuid);
 
-        Cache::forget('brands');
+        Cache::forget('brand:all');
 
         return $edit->update($brand);
 
     }
 
-    public function destroyBrand($id)
+    public function destroyBrand($uuid)
     {
-        $delete = $this->findBrandById($id);
+        $delete = $this->findBrandByUuid($uuid);
 
-        Cache::forget('brands');
+        Cache::forget('brand:all');
 
         return $delete->delete();
     }

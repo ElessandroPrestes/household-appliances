@@ -5,6 +5,7 @@ namespace App\Observers;
 use Illuminate\Support\Str;
 
 use App\Models\Brand;
+use Illuminate\Support\Facades\Cache;
 
 class BrandObserver
 {
@@ -14,6 +15,13 @@ class BrandObserver
     public function creating(Brand $brand): void
     {
         $brand->uuid = (string) Str::uuid();
+
+        $cacheKey = "brand:all"; 
+        $brands = Brand::all(); 
+
+        Cache::rememberForever($cacheKey, function () use ($brands) {
+            return $brands;
+        });
     }
 
     /**

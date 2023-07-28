@@ -26,7 +26,7 @@ class BrandRepositoryTest extends TestCase
     /**
      * @test
      */
-    public function implements_interface()
+    public function implements_interface_brand()
     {
         $this->assertInstanceOf(
                 BrandRepositoryInterface::class,
@@ -96,11 +96,11 @@ class BrandRepositoryTest extends TestCase
      /**
       * @test
       */
-      public function find_brand_by_id()
+      public function find_brand_by_uuid()
       {
           $brand = Brand::factory()->create();
   
-          $response = $this->brandRepository->findBrandById($brand->id);
+          $response = $this->brandRepository->findBrandByUuid($brand->uuid);
   
           $this->assertIsObject($response);
       }
@@ -112,7 +112,7 @@ class BrandRepositoryTest extends TestCase
     {
         $brand = Brand::factory()->create();
 
-        $response = $this->brandRepository->findBrandById($brand->id);
+        $response = $this->brandRepository->findBrandByUuid($brand->uuid);
 
         $this->assertNotNull($response);
 
@@ -130,12 +130,12 @@ class BrandRepositoryTest extends TestCase
     {
         $brand = Brand::factory()->create();
 
-        $destroyed = $this->brandRepository->destroyBrand($brand->id);
+        $destroyed = $this->brandRepository->destroyBrand($brand->uuid);
 
         $this->assertTrue($destroyed);
 
         $this->assertDatabaseMissing('brands', [
-            $destroyed == $brand->id 
+            $destroyed == $brand->uui 
         ]);
     }
 
@@ -146,7 +146,7 @@ class BrandRepositoryTest extends TestCase
     {
         $this->expectException(NotFoundHttpException::class);
 
-        $this->brandRepository->findBrandById('fake_id');
+        $this->brandRepository->findBrandByUuid('fake_id');
 
     }
 }

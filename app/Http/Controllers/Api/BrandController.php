@@ -45,11 +45,11 @@ class BrandController extends Controller
 
     /**
      * Display the specified resource.
-     * @param int $id
+     * @param string $uuid
      */
-    public function show($id)
+    public function show($uuid)
     {
-        $brand = $this->brandService->findBrandById($id);
+        $brand = $this->brandService->findBrandByUuid($uuid);
 
         return response([
             'data'     =>  new BrandResource($brand),
@@ -59,11 +59,11 @@ class BrandController extends Controller
 
     /**
      * Update the specified resource in storage.
-     * @param int $id
+     * @param @param string $uuid
      */
-    public function update(UpdateBrandRequest $request,$id)
+    public function update(UpdateBrandRequest $request,$uuid)
     {
-        $this->brandService->updateBrand($id, $request->validated());
+        $this->brandService->updateBrand($uuid, $request->validated());
 
         return response([
             'message' =>    'Brand Updated successfully'
@@ -72,11 +72,11 @@ class BrandController extends Controller
 
     /**
      * Remove the specified resource from storage.
-     * @param int $id
+     * @param @param string $uuid
      */
-    public function destroy($id)
+    public function destroy($uuid)
     {
-        $this->brandService->destroyBrand($id);
+        $this->brandService->destroyBrand($uuid);
 
         return response([], 204);
     }
