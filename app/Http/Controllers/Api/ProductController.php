@@ -19,9 +19,20 @@ class ProductController extends Controller
     /**
      * Display a listing of the resource.
      */
+<<<<<<< HEAD
     public function index()
     {
         //
+=======
+    public function index($brand)
+    {
+        $products = $this->productService->findProductByBrand($brand);
+
+        return response([
+            'data' => ProductResource::collection($products),
+            'message' => 'Products Successfully listed'
+        ], 200);
+>>>>>>> dev
     }
 
     /**

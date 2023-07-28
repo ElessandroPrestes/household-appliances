@@ -18,6 +18,7 @@ class BrandResource extends JsonResource
             'id' => $this->id,
             'uuid' => $this->uuid,
             'name'  => $this->name,
+            'products' => ProductResource::collection($this->whenLoaded('products')),
             'created_at' =>$this->created_at->format('d-m-Y:i:s'),
             'updated_at' =>$this->updated_at->format('d-m-Y:i:s')
         ];

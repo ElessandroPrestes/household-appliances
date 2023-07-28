@@ -74,4 +74,21 @@ class ProductRepositoryTest extends TestCase
             'name' => 'Geladeira'
         ]);
     }
+
+     /** 
+     * @test
+     */
+    public function findProductByBrand()
+    {
+        $brand = Brand::factory()->create();
+        
+        $products = Product::factory()->count(3)->create(['brand_id' => $brand->id]);
+
+        $foundProducts = $this->productRepository->findProductByBrand($brand->id);
+
+        $this->assertCount(3, $foundProducts);
+        foreach ($foundProducts as $foundProduct) {
+            $this->assertEquals($brand->id, $foundProduct->brand_id);
+        }
+    }
 }

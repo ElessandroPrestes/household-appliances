@@ -41,7 +41,11 @@ class StoreProductRequest extends FormRequest
             'Description.max' => 'The description field cannot exceed 150 characters.',
             'Voltage.required' => 'The voltage field is required.',
             'Voltage.in' => 'The voltage field must be either "110v" or "220v".',
+<<<<<<< HEAD
             //'brand.exists' => 'The brand ID does not exist in the products table.',
+=======
+            'brand.exists' => 'The brand ID does not exist in the products table.',
+>>>>>>> dev
 
         ];
     }
