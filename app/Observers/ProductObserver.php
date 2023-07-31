@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\Product;
+use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Str;
 
 
@@ -14,6 +15,13 @@ class ProductObserver
     public function creating(Product $product): void
     {
         $product->uuid = (string) Str::uuid();
+
+        $cacheKey = "product:all"; 
+        $products = Product::all(); 
+
+        Cache::rememberForever($cacheKey, function () use ($products) {
+            return $products;
+        });
     }
 
     /**

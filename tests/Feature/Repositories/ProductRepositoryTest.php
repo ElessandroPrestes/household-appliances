@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Database\QueryException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Tests\TestCase;
 
@@ -135,4 +136,40 @@ class ProductRepositoryTest extends TestCase
 
         $this->productRepository->findProductByBrand($brand->id, 'non_existent_uuid');
     }
+
+    /** 
+     * @test
+     */
+    public function updateProductByBrand()
+    {
+    
+        
+        $brandId = 123; 
+
+        $uuid = 'fake_uuid'; 
+
+        $data = [
+            'name' => 'Novo nome do produto',
+            'brand_id' => 123,
+            
+        ];
+
+        $productMock = $this->createMock(Product::class);
+
+        $productMock->expects($this->once())->method('update')->with($data)->willReturn(true);
+
+        $productRepository = $this->getMockBuilder(ProductRepository::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['findProductByUuid'])
+            ->getMock();
+
+        $productRepository->expects($this->once())->method('findProductByUuid')->with($uuid)->willReturn($productMock);
+
+        Cache::shouldReceive('forget')->once()->with('product:all');
+
+        $result = $productRepository->updateProductByBrand($brandId, $uuid, $data);
+
+        $this->assertTrue($result); // Verifica se o resultado da atualização é verdadeiro (se a atualização ocorreu com sucesso)
+    }
+          
 }

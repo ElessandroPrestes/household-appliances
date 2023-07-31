@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Product;
 use App\Repositories\Contracts\ProductRepositoryInterface;
+use Illuminate\Support\Facades\Cache;
 use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 
 class ProductRepository implements ProductRepositoryInterface
@@ -52,5 +53,17 @@ class ProductRepository implements ProductRepositoryInterface
             throw new NotFoundHttpException('Brand By Product Not Found');
         }
         
+    }
+
+    public function updateProductByBrand(int $brandId, string $uuid, array $data)
+    {
+        $product = $this->findProductByUuid($uuid);
+
+        Cache::forget('product:all');
+
+        $data['brand_id'] = $brandId;
+
+        return $product->update($data);
+ 
     }
 }

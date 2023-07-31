@@ -19,6 +19,7 @@ class BrandObserver
         $cacheKey = "brand:all"; 
         $brands = Brand::all(); 
 
+        # cache remember 
         Cache::rememberForever($cacheKey, function () use ($brands) {
             return $brands;
         });

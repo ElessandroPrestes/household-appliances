@@ -12,4 +12,6 @@ interface ProductRepositoryInterface
 
     public function findProductByBrand(int $brandId, string $uuid);
 
+    public function updateProductByBrand(int $brandId, string $uuid, array $data);
+
 }
