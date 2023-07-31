@@ -33,9 +33,18 @@ class ProductRepository implements ProductRepositoryInterface
 
     public function findProductByUuid(string $uuid)
     {
-        return $this->modelProduct
-                    ->where('uuid', $uuid)
-                    ->firstOrfail();
+
+         try {
+            
+            $product = $this->modelProduct->where('uuid',$uuid)->firstOrFail();
+            
+            return $product;
+
+        } catch (\Throwable $th ) {
+
+            throw new NotFoundHttpException('Product Not Found');
+
+        }
     }
 
     public function findProductByBrand(int $brandId, string $uuid)

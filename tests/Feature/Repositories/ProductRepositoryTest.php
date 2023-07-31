@@ -198,5 +198,16 @@ class ProductRepositoryTest extends TestCase
         $this->assertTrue($result); 
     }
 
+    /**
+     * @test
+     */
+    public function delete_product_by_brand_not_found()
+    {
+        $this->expectException(NotFoundHttpException::class);
+
+        $this->productRepository->deleteProductByBrand('fake_uuid');
+
+    }
+
           
 }
