@@ -37,4 +37,9 @@ class ProductService
         return $this->productRepository->findProductByBrand($brand->id, $uuid);
     }
 
+    public function deleteProductByBrand(string $uuid)
+    {
+        return $this->productRepository->deleteProductByBrand($uuid);
+    }
+
 }

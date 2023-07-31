@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Requests\StoreProductRequest;
+use App\Http\Requests\UpdateProductRequest;
 use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
@@ -60,17 +61,25 @@ class ProductController extends Controller
 
     /**
      * Update the specified resource in storage.
+     * @param string $uuid
      */
-    public function update(Request $request, string $id)
+    public function update(UpdateProductRequest $request,$brand, $uuid)
     {
-        //
+        $this->productService->updateProduct($request->validated(), $uuid);
+
+        return response([
+            'message' =>    'Product By Brand Updated successfully'
+        ], 200);
     }
 
     /**
      * Remove the specified resource from storage.
+     * @param string $uuid
      */
-    public function destroy(string $id)
+    public function destroy($brand,$uuid)
     {
-        //
+        $this->productService->deleteProduct($uuid);
+
+        return response([], 204);
     }
 }

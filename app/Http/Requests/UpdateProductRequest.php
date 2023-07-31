@@ -5,14 +5,14 @@ namespace App\Http\Requests;
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Validation\Rule;
 
-class StoreProductRequest extends FormRequest
+class UpdateProductRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
      */
     public function authorize(): bool
     {
-        return true;
+        return false;
     }
 
     /**
@@ -23,8 +23,8 @@ class StoreProductRequest extends FormRequest
     public function rules(): array
     {
         return [
-            'name' => 'required|string|unique:products|max:255',
-            'description' => 'required|string|max:150',
+            'name' => 'required|string|unique:productss|max:255',
+            'description => required|string|max:255',
             'voltage' => 'required', Rule::in('110v', '220v'),
             'brand' => 'required|string',
         ];

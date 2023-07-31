@@ -171,5 +171,32 @@ class ProductRepositoryTest extends TestCase
 
         $this->assertTrue($result); // Verifica se o resultado da atualização é verdadeiro (se a atualização ocorreu com sucesso)
     }
+
+    /**
+     * @test
+     */
+
+     public function deleteProductByBrand()
+     {
+        
+        $uuid = 'fake_uuid'; // Substitua por um UUID válido do seu banco de dados
+
+        $productMock = $this->createMock(Product::class);
+
+        $productMock->expects($this->once())->method('delete')->willReturn(true);
+        $productRepository = $this->getMockBuilder(ProductRepository::class)
+            ->disableOriginalConstructor()
+            ->onlyMethods(['findProductByUuid'])
+            ->getMock();
+
+        $productRepository->expects($this->once())->method('findProductByUuid')->with($uuid)->willReturn($productMock);
+
+        Cache::shouldReceive('forget')->once()->with('product:all');
+
+        $result = $productRepository->deleteProductByBrand($uuid);
+
+        $this->assertTrue($result); 
+    }
+
           
 }

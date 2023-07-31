@@ -14,4 +14,6 @@ interface ProductRepositoryInterface
 
     public function updateProductByBrand(int $brandId, string $uuid, array $data);
 
+    public function deleteProductByBrand(string $uuid);
+
 }

@@ -66,4 +66,13 @@ class ProductRepository implements ProductRepositoryInterface
         return $product->update($data);
  
     }
+
+    public function deleteProductByBrand(string $uuid)
+    {
+        $product = $this->findProductByUuid($uuid);
+
+        Cache::forget('product:all');
+
+        return $product->delete();
+    }
 }
