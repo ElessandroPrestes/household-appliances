@@ -1,0 +1,209 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Household appliances",
+        "description": "API for household appliances",
+        "contact": {
+            "email": "elessandrodev@gmail.com"
+        },
+        "license": {
+            "name": "MIT"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000"
+        }
+    ],
+    "paths": {
+        "/api/v1/brands": {
+            "get": {
+                "tags": [
+                    "brands"
+                ],
+                "description": "Returns list of brands",
+                "operationId": "findAllBrands",
+                "responses": {
+                    "200": {
+                        "description": "Brands Successfully listed."
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "brands"
+                ],
+                "description": "Create brand",
+                "operationId": "ee7e7f8fcd9a6991653c61e4570359b7",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Samsung"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Brand Register successfully."
+                    }
+                }
+            }
+        },
+        "/api/v1/brands/{uuid}": {
+            "get": {
+                "tags": [
+                    "brands"
+                ],
+                "description": "Retrieve a Brand by UUID.",
+                "operationId": "findBrandByUuid",
+                "parameters": [
+                    {
+                        "name": "brandUuid",
+                        "in": "path",
+                        "description": "UUID of the brand to be retrieved.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Brand Successfully listed.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "integer",
+                                            "example": 1
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Brand Name"
+                                        },
+                                        "description": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Brand Not Found"
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "brands"
+                ],
+                "description": "Update Brand by UUID",
+                "operationId": "updateBrandByUuid",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the brand to be updated.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "New Brand"
+                                    },
+                                    "description": {
+                                        "type": "string",
+                                        "example": "Updated Brand"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Brand successfully updated.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Brand successfully updated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Brand Not Found"
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "brands"
+                ],
+                "description": "Delete a brand by UUID.",
+                "operationId": "deleteBrandByUuid",
+                "parameters": [
+                    {
+                        "name": "uuid",
+                        "in": "path",
+                        "description": "UUID of the Brand to be deleted.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Brand successfully deleted",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Brand successfully deleted"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Brand Not Found"
+                    }
+                }
+            }
+        }
+    }
+}

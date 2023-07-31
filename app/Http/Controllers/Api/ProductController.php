@@ -9,6 +9,7 @@ use App\Http\Resources\ProductResource;
 use App\Services\ProductService;
 use Illuminate\Http\Request;
 
+
 class ProductController extends Controller
 {
     protected $productService;
